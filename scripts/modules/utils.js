@@ -1,3 +1,7 @@
+// функция для добавления нуля перед часами и минутами
+const addZero = (n) => n < 10 ? `0${n}` : n;
+
+
 export const getcurrentDateTime = () => {
 const months = [
 'янв',
@@ -28,6 +32,9 @@ const date = new Date()
 //console.log('date: ', date); выводится сегодняшняя дата
 //const day = date.getDay() дает в консоли только цифру
 const dayOfWeek = weekdays[date.getDay()]
+// для проверки в консоли
+//date.setHours(3);
+//date.setMinutes(5)
 //console.log('day :', dayOfWeek);
 
 const dayOfMonth = date.getDate();
@@ -41,16 +48,17 @@ const year = date.getFullYear();
 //console.log('year: ', year)
 
 // получим время в переменные
- let hours = date.getHours();
- //console.log('часы:  ' ,hours)
-if(hours < 10){
-hours = `0${hours}`
-}
-let minutes = date.getMinutes();
+ const hours = addZero(date.getHours());
+//console.log('часы:  ' ,hours)
+//if(hours < 10){
+//hours = `0${hours}`
+//}
+const minutes = addZero(date.getMinutes());
 //console.log('минуты: ', minutes)
-if(minutes < 10){
-minutes = `0${minutes}`
-}
+//if(minutes < 10){
+//minutes = `0${minutes}`
+//}
+
 // возвращается в currentDateTime , выводим в консоль в файле render
 return {dayOfMonth, month, year,  dayOfWeek, hours, minutes};
 
