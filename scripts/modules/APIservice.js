@@ -16,8 +16,25 @@ export const fetchWeather = async (city) => {
         //console.log(data)
         // возвращаем объект 
        return { success: true, data }
-    }catch(err){
+    }catch(error){
     // если произошла ошибка вернуть
-   return { success: false, err}
+   return { success: false, error}
    }
     }
+
+    // третий блок с иконками
+    export const fetchForecast = async (city) => {
+
+        try{
+            const response = await fetch(`${API_URL}forecast?q=${city}&appid=${API_KEY}&lang=ru`);
+    
+            if(!response.ok){
+               throw new Error ("Ошибка запроса")
+    
+            }
+            const data = await response.json();
+           return { success: true, data }
+        }catch(error){
+       return { success: false, error}
+       }
+        }
