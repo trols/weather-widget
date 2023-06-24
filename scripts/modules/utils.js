@@ -63,6 +63,7 @@ const minutes = addZero(date.getMinutes());
 return {dayOfMonth, month, year,  dayOfWeek, hours, minutes};
 
 };
+/*
 export const getWindDirection = (deg) => {
     const directions = [
         // направление ветра - откуда дует ветер
@@ -80,7 +81,7 @@ export const getWindDirection = (deg) => {
     const i = Math.round(deg / 45) % 8
      return  directions[i]
     }
-
+*/
     export const calculateDewPoint = (temp, humidity) => {
 // считаем точку росы  dewPoint
         const a = 17.27;
@@ -101,7 +102,8 @@ export const getWeatherForecastData = (data) => {
     const  forecast = data.list.filter(
         item => 
         new Date(item.dt_txt).getHours() === 12 && 
-        new Date(item.dt_txt).getDate() > new Date().getDate(),
+        new Date(item.dt_txt).getDate() > new Date().getDate() &&
+        new Date(item.dt_txt).getDate() < new Date().getDate() + 5,
     );
     //console.log(forecast)
 
@@ -130,7 +132,8 @@ const forecastData = forecast.map((item) => {
     if(tempDate.getDate() === date.getDate()){
        if(temp < minTemp){
         minTemp = temp;
-    }else {
+    }
+    if(temp > maxTemp) {
         maxTemp = temp;
   }
  }
